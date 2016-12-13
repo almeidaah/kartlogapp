@@ -5,6 +5,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
+/**
+ * KartLogReader - Responsible for reading a data file.
+ */
 public class KartLogReader {
 
 	public KartLogReader(String fileName) {
