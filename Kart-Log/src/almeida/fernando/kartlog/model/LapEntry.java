@@ -1,24 +1,26 @@
 package almeida.fernando.kartlog.model;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 /**
  * @author almeida A class that represents a Driver lap entry
  */
 public class LapEntry {
 	
-	private LocalDateTime hour;
+	private LocalTime hour;
 	private Long driverNumber;
 	private String driverName;
 	private Integer lapNumber;
-	private LocalDateTime lapTime;
+	private Duration lapTime;
 	private Double avgVelocity;
 
-	public LocalDateTime getHour() {
+	public LocalTime getHour() {
 		return hour;
 	}
 
-	public void setHour(LocalDateTime hour) {
+	public void setHour(LocalTime hour) {
 		this.hour = hour;
 	}
 
@@ -46,11 +48,11 @@ public class LapEntry {
 		this.lapNumber = lapNumber;
 	}
 
-	public LocalDateTime getLapTime() {
+	public Duration getLapTime() {
 		return lapTime;
 	}
 
-	public void setLapTime(LocalDateTime lapTime) {
+	public void setLapTime(Duration lapTime) {
 		this.lapTime = lapTime;
 	}
 
