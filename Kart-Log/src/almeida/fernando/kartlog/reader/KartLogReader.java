@@ -3,18 +3,11 @@ package almeida.fernando.kartlog.reader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.Duration;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.temporal.TemporalUnit;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Stream;
 
 import almeida.fernando.kartlog.model.KartDriver;
-import almeida.fernando.kartlog.model.KartRace;
 import almeida.fernando.kartlog.model.LapEntry;
 
 /**
@@ -22,49 +15,42 @@ import almeida.fernando.kartlog.model.LapEntry;
  */
 public class KartLogReader {
 
-	public KartLogReader(String fileName) {
-		try (Stream<String> stream = Files.lines(Paths.get(fileName))) {
-		    
-		    //If want to print the list
-		    //  stream.forEach(System.out::println);
+    public KartLogReader(String fileName) {
 
-		    KartRace kartRace = new KartRace();
-		    
-		    //Reading all lines and split into Object
-		    for(String line : Files.readAllLines(Paths.get(fileName))){
-			
-			List<String> columns2 = Arrays.asList(line.split("\\s+"));
-			
-			Object[] columns = columns2.toArray();
-			System.out.println(columns[0]);
-			
-			LapEntry lap = new LapEntry();
+	try {
 
-			LocalTime hour = LocalTime.parse((CharSequence) columns[0]);
-			lap.setHour(hour);
-			
-			KartDriver driver = new KartDriver((Integer)columns[1]);
-			
-			lap.setDriverName(String.valueOf(columns[3]));
-			lap.setLapNumber((Integer)columns[4]);
-			
-			//Duration lap
-			//lap.setLapTime(Duration.of);
-			//Duration.of((Long)columns[5], TemporalUnit)colu
-			Duration dur = Duration.ofMinutes((Long)columns[5]);
-			System.out.println(dur);
-			
+	    Files.readAllLines(Paths.get(fileName)).forEach(line -> {
+		List<String> lstColumns = Arrays.asList(line.split("\\s+"));
 
-			
-			
-			//lap.setLapTime();
-			
-			System.out.println(columns2);
-		    }
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		Object[] columns = lstColumns.toArray();
+
+		LapEntry lap = new LapEntry();
+
+		LocalTime hour = LocalTime.parse((CharSequence) columns[0]);
+		lap.setHour(hour);
+
+		lap.setDriverName(String.valueOf(columns[3]));
+
+		Integer lapNumber = new Integer((String) columns[4]);
+		lap.setLapNumber(lapNumber);
+		
+		/*
+		 * Here want to get Time in Minutes(m:ss.sss) but donf find an Java8 implementation for that
+		 */
+		
+		
+		Integer id = new Integer((String) columns[1]);
+		KartDriver driver = new KartDriver(id);
+
+		String avgSpeed = ((String)columns[6]).replace(",", ".");
+		lap.setAvgSpeed(new Double(avgSpeed));
+
+	    });
+	} catch (NumberFormatException | IOException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
 	}
 
-	
+    }
+
 }

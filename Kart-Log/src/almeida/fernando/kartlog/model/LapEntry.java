@@ -13,7 +13,7 @@ public class LapEntry {
 	private String driverName;
 	private Integer lapNumber;
 	private Duration lapTime;
-	private Double avgVelocity;
+	private Double avgSpeed;
 
 	public LocalTime getHour() {
 		return hour;
@@ -55,12 +55,12 @@ public class LapEntry {
 		this.lapTime = lapTime;
 	}
 
-	public Double getAvgVelocity() {
-		return avgVelocity;
+	public Double getAvgSpeed() {
+		return avgSpeed;
 	}
 
-	public void setAvgVelocity(Double avgVelocity) {
-		this.avgVelocity = avgVelocity;
+	public void setAvgSpeed(Double avgSpeed) {
+		this.avgSpeed = avgSpeed;
 	}
 
 }
