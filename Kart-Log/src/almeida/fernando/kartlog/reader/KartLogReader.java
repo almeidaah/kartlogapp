@@ -15,7 +15,7 @@ import almeida.fernando.kartlog.model.LapEntry;
  */
 public class KartLogReader {
 
-    public KartLogReader(String fileName) {
+    public KartLogReader(List<KartDriver> drivers, String fileName) {
 
 	try {
 
@@ -38,16 +38,25 @@ public class KartLogReader {
 		 * Here want to get Time in Minutes(m:ss.sss) but donf find an Java8 implementation for that
 		 */
 		
-		
 		Integer id = new Integer((String) columns[1]);
 		KartDriver driver = new KartDriver(id);
 
 		String avgSpeed = ((String)columns[6]).replace(",", ".");
 		lap.setAvgSpeed(new Double(avgSpeed));
+		
+//		driver.getDriverLaps().add(lap);
+		
+//		drivers.stream().forEach(d -> System.out.println("ID : " + d.getId()));
+//		
+//		if(drivers.contains(driver)){
+//		    driver.getDriverLaps().add(lap);
+//		}else{
+//		    drivers.add(driver);
+//		}
+		
 
 	    });
 	} catch (NumberFormatException | IOException e) {
-	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}
 

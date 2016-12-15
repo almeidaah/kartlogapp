@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * @author fernando.almeida
  * A class that represents a Kart Driver
  */
-public class KartDriver {
+public class KartDriver{
 	
     	private Integer id;
 	private ArrayList<LapEntry> driverLaps;
@@ -14,6 +14,7 @@ public class KartDriver {
 	public KartDriver(Integer id) {
 	    super();
 	    this.id = id;
+	    driverLaps = new ArrayList<>();
 	}
 
 	public ArrayList<LapEntry> getDriverLaps() {
@@ -32,5 +33,12 @@ public class KartDriver {
 	    this.id = id;
 	}
 	
-	
+	@Override
+	public boolean equals(Object obj) {
+	    if(obj instanceof KartDriver){
+		return this.id == ((KartDriver)obj).getId();
+	    }
+	    return false;
+	}
+
 }

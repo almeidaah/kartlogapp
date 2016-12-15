@@ -9,7 +9,6 @@ import java.time.LocalTime;
 public class LapEntry {
 	
 	private LocalTime hour;
-	private Long driverNumber;
 	private String driverName;
 	private Integer lapNumber;
 	private Duration lapTime;
@@ -21,14 +20,6 @@ public class LapEntry {
 
 	public void setHour(LocalTime hour) {
 		this.hour = hour;
-	}
-
-	public Long getDriverNumber() {
-		return driverNumber;
-	}
-
-	public void setDriverNumber(Long driverNumber) {
-		this.driverNumber = driverNumber;
 	}
 
 	public String getDriverName() {

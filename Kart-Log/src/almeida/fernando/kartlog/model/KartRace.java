@@ -7,7 +7,11 @@ public class KartRace {
 
     private static List<KartDriver> drivers;
     
-    static{
+    public KartRace() {
 	drivers = new ArrayList<KartDriver>();
+    }
+    
+    public List<KartDriver> getDrivers() {
+	return drivers;
     }
 }
