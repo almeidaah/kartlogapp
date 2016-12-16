@@ -11,7 +11,7 @@ public class LapEntry {
 	private LocalTime hour;
 	private String driverName;
 	private Integer lapNumber;
-	private Duration lapTime;
+	private Long lapTime;
 	private Double avgSpeed;
 
 	public LocalTime getHour() {
@@ -38,11 +38,11 @@ public class LapEntry {
 		this.lapNumber = lapNumber;
 	}
 
-	public Duration getLapTime() {
+	public Long getLapTime() {
 		return lapTime;
 	}
 
-	public void setLapTime(Duration lapTime) {
+	public void setLapTime(Long lapTime) {
 		this.lapTime = lapTime;
 	}
 

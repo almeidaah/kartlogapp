@@ -3,9 +3,12 @@ package almeida.fernando.kartlog.reader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import almeida.fernando.kartlog.model.KartDriver;
 import almeida.fernando.kartlog.model.LapEntry;
@@ -34,20 +37,26 @@ public class KartLogReader {
 		Integer lapNumber = new Integer((String) columns[4]);
 		lap.setLapNumber(lapNumber);
 		
-		/*
-		 * Here want to get Time in Minutes(m:ss.sss) but donf find an Java8 implementation for that
-		 */
-		
+		SimpleDateFormat sdf = new SimpleDateFormat("m:ss.SSS");
+		sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+		Date lapTime = null;
+		try {
+		    lapTime = sdf.parse((String)columns[5]);
+		} catch (Exception e) {
+		}finally {
+		    lap.setLapTime(lapTime.getTime());
+		}
+		        
 		Integer id = new Integer((String) columns[1]);
 		KartDriver driver = new KartDriver(id);
 
 		String avgSpeed = ((String)columns[6]).replace(",", ".");
 		lap.setAvgSpeed(new Double(avgSpeed));
 		
-//		driver.getDriverLaps().add(lap);
+		//KartDriver d = drivers.get(driver.getId());
+		driver.getDriverLaps().add(lap);
+		drivers.add(driver);
 		
-//		drivers.stream().forEach(d -> System.out.println("ID : " + d.getId()));
-//		
 //		if(drivers.contains(driver)){
 //		    driver.getDriverLaps().add(lap);
 //		}else{
@@ -56,6 +65,9 @@ public class KartLogReader {
 		
 
 	    });
+	    
+		drivers.stream().forEach(d -> System.out.println("ID : " + d.getId()));
+
 	} catch (NumberFormatException | IOException e) {
 	    e.printStackTrace();
 	}
