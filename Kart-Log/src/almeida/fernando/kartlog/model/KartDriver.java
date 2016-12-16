@@ -36,9 +36,9 @@ public class KartDriver{
 	@Override
 	public boolean equals(Object obj) {
 	    if(obj instanceof KartDriver){
-		return this.id == ((KartDriver)obj).getId();
+		return this.id.equals(((KartDriver) obj).id);
 	    }
 	    return false;
 	}
-
+	
 }

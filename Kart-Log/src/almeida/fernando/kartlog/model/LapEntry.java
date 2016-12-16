@@ -1,6 +1,5 @@
 package almeida.fernando.kartlog.model;
 
-import java.time.Duration;
 import java.time.LocalTime;
 
 /**
