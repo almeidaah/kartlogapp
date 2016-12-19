@@ -1,6 +1,7 @@
 package almeida.fernando.kartlog.model;
 
 import java.util.ArrayList;
+import java.util.OptionalDouble;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -10,7 +11,7 @@ public class KartDriver {
 
 	private Integer id;
 	private String name;
-	
+
 	private ArrayList<LapEntry> driverLaps;
 
 	public KartDriver(Integer id) {
@@ -42,7 +43,7 @@ public class KartDriver {
 		}
 		return false;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -51,12 +52,30 @@ public class KartDriver {
 		this.name = driverName;
 	}
 
-	
-
 	public Long getRaceTotalTime() {
 		Long totalDriverTime = this.getDriverLaps().parallelStream().mapToLong(LapEntry::getLapTime).sum();
 		return TimeUnit.MILLISECONDS.toSeconds(totalDriverTime);
 	}
-	
-	
+
+	public LapEntry getBestLap() {
+
+		LapEntry bestDriverLap = null;
+		Long bestTime = Long.MAX_VALUE;
+
+		for (LapEntry lap : this.getDriverLaps()) {
+			Long lapTime = TimeUnit.MILLISECONDS.toSeconds(lap.getLapTime());
+			if (lapTime < bestTime) {
+				bestDriverLap = lap;
+				bestTime = lapTime;
+			}
+		}
+
+		return bestDriverLap;
+	}
+
+	public Double getRaceAvgSpeed() {
+		OptionalDouble optDouble = this.getDriverLaps().parallelStream().mapToDouble(LapEntry::getAvgSpeed).average();
+		return optDouble.getAsDouble();
+	}
+
 }
