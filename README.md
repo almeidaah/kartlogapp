@@ -1,1 +1,0 @@
-# kartlogapp fernando.almeida

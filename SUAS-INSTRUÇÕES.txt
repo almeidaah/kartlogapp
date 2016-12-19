@@ -1,0 +1,9 @@
+# kartlogapp fernando.almeida
+
+Utilizado recursos da linguagem Java8 (Stream/Lambda/ParallelStream)
+API Java7 java.nio para leitura de arquivos
+Utilização de for encadeado(enchanced-for)
+
+Bônus realizados:
+- Descobrir a melhor volta de cada piloto
+- Calcular a velocidade média de cada piloto durante toda corrida (Facilidade em utilizar API JAva 8 e facilidade de atender o requisito devido à modelagem do problema coesa)
