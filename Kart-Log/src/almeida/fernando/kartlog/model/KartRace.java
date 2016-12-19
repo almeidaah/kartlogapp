@@ -1,30 +1,21 @@
 package almeida.fernando.kartlog.model;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 public class KartRace {
 
+	public static List<KartDriver> getResults(Map<Integer, KartDriver> raceLog) {
 
-    public static KartDriver getWinner(Map<Integer, KartDriver> raceLog){
-	
-	//KartDriver winner = null;
-	Long winnerSeconds = Long.MAX_VALUE;
-	
-	raceLog.forEach( (id, driver) ->{
-	    Long totalDriverTime = driver.getDriverLaps().parallelStream().mapToLong(LapEntry::getLapTime).sum();
+		List<KartDriver> drivers = new ArrayList<KartDriver>(raceLog.values());
 
-	    long totalLapSeconds = TimeUnit.MILLISECONDS.toSeconds(totalDriverTime);
+		Comparator<KartDriver> raceTimeComparator = (KartDriver o1, KartDriver o2) -> o1.getRaceTotalTime()
+				.compareTo(o2.getRaceTotalTime());
 
-	    System.out.println("Driver : " + driver.getId() + " TOTAL RACETIME IN SECONDS :" + totalLapSeconds);
-	    
-	    if(totalLapSeconds < winnerSeconds){
-		//setting winner to external variable has a problem with java stream
-		//winner = driver;
-	    }
-	    
-	});
-	
-	return null;
-    }
+		Collections.sort(drivers, raceTimeComparator);
+		return drivers;
+	}
 }

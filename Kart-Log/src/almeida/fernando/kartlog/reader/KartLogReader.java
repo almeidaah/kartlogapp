@@ -41,7 +41,6 @@ public class KartLogReader {
 		LocalTime hour = LocalTime.parse((CharSequence) columns[0]);
 		lapEntry.setHour(hour);
 
-		lapEntry.setDriverName(String.valueOf(columns[3]));
 
 		Integer lapNumber = new Integer((String) columns[4]);
 		lapEntry.setLapNumber(lapNumber);
@@ -58,6 +57,7 @@ public class KartLogReader {
 
 		Integer id = new Integer((String) columns[1]);
 		KartDriver driver = new KartDriver(id);
+		driver.setName(String.valueOf(columns[3]));
 
 		String avgSpeed = ((String) columns[6]).replace(",", ".");
 		lapEntry.setAvgSpeed(new Double(avgSpeed));

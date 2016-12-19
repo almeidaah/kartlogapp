@@ -1,20 +1,22 @@
 package almeida.fernando.kartlog.model;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 /**
- * @author fernando.almeida
- * A class that represents a Kart Driver
+ * @author fernando.almeida A class that represents a Kart Driver
  */
-public class KartDriver{
+public class KartDriver {
+
+	private Integer id;
+	private String name;
 	
-    	private Integer id;
 	private ArrayList<LapEntry> driverLaps;
 
 	public KartDriver(Integer id) {
-	    super();
-	    this.id = id;
-	    driverLaps = new ArrayList<>();
+		super();
+		this.id = id;
+		driverLaps = new ArrayList<>();
 	}
 
 	public ArrayList<LapEntry> getDriverLaps() {
@@ -26,19 +28,35 @@ public class KartDriver{
 	}
 
 	public Integer getId() {
-	    return id;
+		return id;
 	}
 
 	public void setId(Integer id) {
-	    this.id = id;
+		this.id = id;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
-	    if(obj instanceof KartDriver){
-		return this.id.equals(((KartDriver) obj).id);
-	    }
-	    return false;
+		if (obj instanceof KartDriver) {
+			return this.id.equals(((KartDriver) obj).id);
+		}
+		return false;
 	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String driverName) {
+		this.name = driverName;
+	}
+
+	
+
+	public Long getRaceTotalTime() {
+		Long totalDriverTime = this.getDriverLaps().parallelStream().mapToLong(LapEntry::getLapTime).sum();
+		return TimeUnit.MILLISECONDS.toSeconds(totalDriverTime);
+	}
+	
 	
 }
